@@ -51,7 +51,7 @@ fn part2(column1: &Vec<i32>, column2: &Vec<i32>) -> i32 {
 }
 
 fn get_columns(input: &Vec<String>) -> (Vec<i32>, Vec<i32>) {
-    let mut column1  = Vec::new();
+    let mut column1 = Vec::new();
     let mut column2 = Vec::new();
 
     for line in input {
