@@ -1,11 +1,13 @@
 mod day;
 mod day1;
+mod day2;
 
 use std::process::exit;
 
 use clap::Parser;
 use day::{Day, InputType, Part};
 use day1::day1::Day1;
+use day2::day2::Day2;
 
 #[derive(Parser)]
 struct Cli {
@@ -31,6 +33,7 @@ fn main() {
 
     let answer: Result<i32, String> = match args.day.as_str() {
         "day1" => Ok(Day1 {}.run(part, input)),
+        "day2" => Ok(Day2 {}.run(part, input)),
         _ => Err("Invalid day provided".to_owned())
     };
 
