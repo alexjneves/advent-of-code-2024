@@ -18,7 +18,7 @@ impl Day for Day2 {
 fn part1(input: &Vec<String>) -> i32 {
     input.iter()
         .map(parse_report)
-        .map(|report| is_level_safe(report, false))
+        .map(|report| is_level_safe_part_1(&report))
         .filter(|is_safe| *is_safe)
         .count() as i32
 }
@@ -26,7 +26,7 @@ fn part1(input: &Vec<String>) -> i32 {
 fn part2(input: &Vec<String>) -> i32 {
     input.iter()
         .map(parse_report)
-        .map(|report| is_level_safe(report, true))
+        .map(|report| is_level_safe_part_2_brute_force(&report))
         .filter(|is_safe| *is_safe)
         .count() as i32
 }
@@ -35,7 +35,7 @@ fn parse_report(input: &String) -> Vec<u32> {
     input.split_whitespace().map(|i| i.parse::<u32>().unwrap()).collect()
 }
 
-fn is_level_safe(level: Vec<u32>, problem_dampener: bool) -> bool {
+fn is_level_safe_part_1(level: &Vec<u32>) -> bool {
     let mut asc: Option<bool> = Option::None;
 
     for window in level.windows(2) {
@@ -58,6 +58,59 @@ fn is_level_safe(level: Vec<u32>, problem_dampener: bool) -> bool {
                 }
             }
         }
+    }
+
+    true
+}
+
+fn is_level_safe_part_2_brute_force(level: &Vec<u32>) -> bool {
+    if is_level_safe_part_1(&level) {
+        return true;
+    }
+
+    for i in 0..level.len() {
+        let mut level_without_index = level.to_owned();
+        level_without_index.remove(i);
+
+        if is_level_safe_part_1(&level_without_index) {
+            return true;
+        }
+    }
+
+    false
+}
+
+// Doesn't work
+fn is_level_safe_part_2(level: &Vec<u32>, problem_dampener: bool) -> bool {
+    let mut asc: Option<bool> = Option::None;
+    let mut allowed_skip = problem_dampener;
+
+    let mut i  = 0;
+    let mut j = 1;
+
+    while j < level.len() {
+        let x = level.get(i).unwrap();
+        let y = level.get(j).unwrap();
+
+        let check_asc = asc.unwrap_or(x < y);
+
+        let is_valid = is_diff_in_range(x, y) && (if check_asc {x < y} else {x > y});
+
+        if !is_valid {
+            if !allowed_skip {
+                return false;
+            }
+
+            allowed_skip = false;
+        } else {
+            if asc.is_none() {
+                asc = Some(check_asc);
+            }
+
+            i = j;
+        }
+
+        j = j + 1;
     }
 
     true
@@ -104,11 +157,11 @@ mod tests {
 
     #[test]
     fn day2_part2_custom_input() {
-        const EXPECTED_ANSWER: i32 = 0;
+        const EXPECTED_ANSWER: i32 = 386;
 
         let day2 = Day2 {};
         let answer = day2.run(Part::Two,InputType::Custom);
-
+        
         assert!(answer == EXPECTED_ANSWER);
     }
 }
