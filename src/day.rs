@@ -15,6 +15,15 @@ pub enum InputType {
 }
 
 pub fn read_day_input(day: u8, part: &Part, input_type: &InputType) -> Vec<String> {
+    let contents = read_day_input_string(day, part, input_type);
+
+    contents
+        .split('\n')
+        .map(|line| line.to_owned())
+        .collect()
+}
+
+pub fn read_day_input_string(day: u8, part: &Part, input_type: &InputType) -> String {
     let path = match input_type {
         InputType::Example => format!(
             "src/day{}/files/part{}_example_input.txt",
@@ -27,12 +36,7 @@ pub fn read_day_input(day: u8, part: &Part, input_type: &InputType) -> Vec<Strin
         )
     };
 
-    let contents = fs::read_to_string(path).unwrap();
-
-    contents
-        .split('\n')
-        .map(|line| line.to_owned())
-        .collect()
+    fs::read_to_string(path).unwrap()
 }
 
 fn part_to_int(part: &Part) -> i32 {
