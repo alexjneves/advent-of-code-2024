@@ -3,6 +3,7 @@ mod day1;
 mod day2;
 mod day3;
 mod day5;
+mod day6;
 
 use std::process::exit;
 
@@ -12,6 +13,7 @@ use day1::day1::Day1;
 use day2::day2::Day2;
 use day3::day3::Day3;
 use day5::day5::Day5;
+use day6::day6::Day6;
 
 #[derive(Parser)]
 struct Cli {
@@ -40,6 +42,7 @@ fn main() {
         "day2" => Ok(Day2 {}.run(part, input)),
         "day3" => Ok(Day3 {}.run(part, input)),
         "day5" => Ok(Day5 {}.run(part, input)),
+        "day6" => Ok(Day6 {}.run(part, input)),
         _ => Err("Invalid day provided".to_owned())
     };
 
