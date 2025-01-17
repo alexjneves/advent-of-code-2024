@@ -1,10 +1,10 @@
 use crate::day::{read_day_input, Day, InputType, Part};
 
-const DAY_ID: u8 = 6;
+const DAY_ID: u8 = 7;
 
-pub struct Day6 {}
+pub struct Day7 {}
 
-impl Day for Day6 {
+impl Day for Day7 {
     fn run(&self, part: Part, input_type: InputType) -> i32 {
         let input = read_day_input(DAY_ID, &part, &input_type);
 
@@ -28,41 +28,41 @@ mod tests {
     use super::*;
 
     #[test]
-    fn day6_part1_example_input() {
-        const EXPECTED_ANSWER: i32 = 41;
+    fn day7_part1_example_input() {
+        const EXPECTED_ANSWER: i32 = 0;
 
-        let day6 = Day6 {};
-        let answer = day6.run(Part::One, InputType::Example);
+        let day7 = Day7 {};
+        let answer = day7.run(Part::One, InputType::Example);
 
         assert!(answer == EXPECTED_ANSWER);
     }
 
     #[test]
-    fn day6_part1_custom_input() {
+    fn day7_part1_custom_input() {
         const EXPECTED_ANSWER: i32 = 0;
 
-        let day6 = Day6 {};
-        let answer = day6.run(Part::One,InputType::Custom);
+        let day7 = Day7 {};
+        let answer = day7.run(Part::One,InputType::Custom);
 
         assert!(answer == EXPECTED_ANSWER);
     }
 
     #[test]
-    fn day6_part2_example_input() {
+    fn day7_part2_example_input() {
         const EXPECTED_ANSWER: i32 = 0;
 
-        let day6 = Day6 {};
-        let answer = day6.run(Part::Two, InputType::Example);
+        let day7 = Day7 {};
+        let answer = day7.run(Part::Two, InputType::Example);
 
         assert!(answer == EXPECTED_ANSWER);
     }
 
     #[test]
-    fn day6_part2_custom_input() {
+    fn day7_part2_custom_input() {
         const EXPECTED_ANSWER: i32 = 0;
 
-        let day6 = Day6 {};
-        let answer = day6.run(Part::Two,InputType::Custom);
+        let day7 = Day7 {};
+        let answer = day7.run(Part::Two,InputType::Custom);
         
         assert!(answer == EXPECTED_ANSWER);
     }
